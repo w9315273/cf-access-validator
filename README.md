@@ -104,4 +104,4 @@ Cloudflare Access JWT 验证器 —— 适用于 `nginx auth_request`。
 >     proxy_set_header xxx;
 > }
 > ```
-
+[<img src="https://github.githubassets.com/images/icons/emoji/unicode/1f60e.png" width="20"/>](https://github.com/w9315273/cf-access-validator/wiki/20250831_21:55)
