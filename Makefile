@@ -1,9 +1,3 @@
-#
-# Copyright (C) 2025 w9315273
-#
-# This is free software, licensed under the Apache License, Version 2.0.
-#
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cf-auth
@@ -31,20 +25,21 @@ define Package/cf-auth
 endef
 
 define Package/cf-auth/description
-Minimal Cloudflare Access JWT validator for OpenWrt.
+Minimal Cloudflare Access JWT validator for OpenWrt (nginx auth_request).
 endef
 
 define Build/Prepare
 	$(call GoPackage/Build/Prepare)
-	$(CP) $(CURDIR)/src/* $(PKG_BUILD_DIR)/
 endef
 
 define Package/cf-auth/install
-	$(call GoPackage/Package/Install/Bin,$(1))
+	$(call GoPackage/Package/Install/Bin,$(1))  # -> /usr/bin/cf-auth
+
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) $(CURDIR)/src/packaging/openwrt/files/etc/init.d/cf-auth $(1)/etc/init.d/cf-auth
+	$(INSTALL_BIN) $(CURDIR)/files/etc/init.d/cf-auth $(1)/etc/init.d/cf-auth
+
 	$(INSTALL_DIR) $(1)/etc/config
-	$(INSTALL_CONF) $(CURDIR)/src/packaging/openwrt/files/etc/config/cf-auth $(1)/etc/config/cf-auth
+	$(INSTALL_CONF) $(CURDIR)/files/etc/config/cf-auth $(1)/etc/config/cf-auth
 endef
 
 $(eval $(call GoBinPackage,$(PKG_NAME)))
