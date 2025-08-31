@@ -1,3 +1,9 @@
+#
+# Copyright (C) 2025 w9315273
+#
+# This is free software, licensed under the Apache License, Version 2.0.
+#
+
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cf-auth
@@ -11,6 +17,7 @@ PKG_BUILD_DEPENDS:=golang/host
 
 GO_MODULE_PATH:=github.com/w9315273/cf-access-validator
 GO_PKG:=$(GO_MODULE_PATH)/apps/cf-auth
+GO_PKG_BUILD_PKG:=$(GO_PKG)
 GO_PKG_LDFLAGS:=-s -w
 
 include $(INCLUDE_DIR)/package.mk
@@ -30,10 +37,13 @@ endef
 
 define Build/Prepare
 	$(call GoPackage/Build/Prepare)
+	$(MKDIR) $(PKG_BUILD_DIR)/src/$(GO_MODULE_PATH)
+	$(CP) -a $(CURDIR)/apps $(PKG_BUILD_DIR)/src/$(GO_MODULE_PATH)/
+	$(CP) -a $(CURDIR)/go.mod $(CURDIR)/go.sum $(PKG_BUILD_DIR)/src/$(GO_MODULE_PATH)/
 endef
 
 define Package/cf-auth/install
-	$(call GoPackage/Package/Install/Bin,$(1))  # -> /usr/bin/cf-auth
+	$(call GoPackage/Package/Install/Bin,$(1))
 
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) $(CURDIR)/files/etc/init.d/cf-auth $(1)/etc/init.d/cf-auth
