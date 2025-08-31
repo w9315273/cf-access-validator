@@ -55,11 +55,3 @@ jobs:
           cache-to: type=gha,mode=max
           provenance: false
           push-by-digest: false
-
-      - name: 清理未打标签的历史版本
-        uses: actions/delete-package-versions@v5
-        with:
-          package-name: ${{ github.repository }}
-          package-type: 'container'
-          delete-only-untagged-versions: true
-          min-versions-to-keep: 0
