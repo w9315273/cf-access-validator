@@ -67,7 +67,7 @@ Cloudflare Access JWT 验证器 —— 适用于 `nginx auth_request`。
 > [!TIP]
 > - 建议使用.env文件存储环境变量
 > - 创建一个名为 .env 的文件, 内容如下:
-> - TEAM_DOMAIN=<Team>.cloudflareaccess.com
+> - TEAM_DOMAIN=Team.cloudflareaccess.com
 > - AUD_BLOG=xxxx
 > - AUD_GRAFANA=xxxx
 
