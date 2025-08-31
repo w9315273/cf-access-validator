@@ -105,8 +105,3 @@ Cloudflare Access JWT 验证器 —— 适用于 `nginx auth_request`。
 > }
 > ```
 
-## 环境变量
-> [!TIP]
-> - TEAM_DOMAIN：Cloudflare Access 团队域名  
-> - APP_MAP：应用与 AUD 映射，格式 `name=aud[,aud];name2=aud`  
-> - ADDR：监听地址（默认 `127.0.0.1:9000`）  
