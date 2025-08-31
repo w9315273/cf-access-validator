@@ -22,6 +22,7 @@ Cloudflare Access JWT 验证器 —— 适用于 `nginx auth_request`。
 > 系统 → 软件包 → 上传软件包 → 选择.ipk → 上传并安装
 > ```
 
+> [!NOTE]
 > ### 2. OpenWrt 源码集成
 > ```
 > cd package
@@ -33,6 +34,7 @@ Cloudflare Access JWT 验证器 —— 适用于 `nginx auth_request`。
 > make menuconfig   # 勾选 Network/cf-auth
 > ```
 
+> [!NOTE]
 > ### 3. Docker
 > ```
 > services:
