@@ -5,12 +5,10 @@ services:
     networks:
       net:
         ipv4_address: 172.18.100.2
-#    ports:
-#      - "9000:9000"    # 可选, 建议不映射到宿主机, 仅容器内访问
     environment:
-      ADDR: "0.0.0.0:9000"    # 监听地址:端口
-      TEAM_DOMAIN: ${TEAM_DOMAIN}   # 必填, 替换为你的 Cloudflare Access 团队域名, 例如 your-team.cloudflareaccess.com
-      APP_MAP: "blog=${AUD_BLOG};grafana=${AUD_GRAFANA}"    # 必填, 替换为你的应用名称和对应的AUD值, 多个应用用分号分隔, 例如 blog=xxxx;grafana=xxxx
+      ADDR: "0.0.0.0:9000"
+      TEAM_DOMAIN: “${TEAM_DOMAIN}”
+      APP_MAP: "blog=${AUD_BLOG};grafana=${AUD_GRAFANA}"
     restart: always
 
 networks:
@@ -20,9 +18,3 @@ networks:
       config:
         - subnet: 172.18.100.0/24
           gateway: 172.18.100.1
-
-# 建议使用.env文件存储环境变量
-# 创建一个名为 .env 的文件, 内容如下:
-# TEAM_DOMAIN=<Team>.cloudflareaccess.com
-# AUD_BLOG=xxxx
-# AUD_GRAFANA=xxxx
