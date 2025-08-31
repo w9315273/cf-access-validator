@@ -1,0 +1,10 @@
+
+config cf_auth 'main'
+        option enabled '0'
+        option team_domain '<Team>.cloudflareaccess.com'
+        option addr '127.0.0.1:9000'
+
+config app
+        option instance 'main'
+        option name 'appname'
+        list aud '<Access Aud>'
