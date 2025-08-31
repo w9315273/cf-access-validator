@@ -21,7 +21,7 @@ Cloudflare Access JWT 验证器 —— 适用于 `nginx auth_request`。
 > ```
 > 系统 → 软件包 → 上传软件包 → 选择.ipk → 上传并安装
 > ```
-> 
+
 > ### 2. OpenWrt 源码集成
 > ```
 > cd package
@@ -32,7 +32,7 @@ Cloudflare Access JWT 验证器 —— 适用于 `nginx auth_request`。
 > ```
 > make menuconfig   # 勾选 Network/cf-auth
 > ```
-> 
+
 > ### 3. Docker
 > ```
 > services:
@@ -57,13 +57,13 @@ Cloudflare Access JWT 验证器 —— 适用于 `nginx auth_request`。
 >       config:
 >         - subnet: 172.18.100.0/24
 >           gateway: 172.18.100.1
-> 
-> # 建议使用.env文件存储环境变量
-> # 创建一个名为 .env 的文件, 内容如下:
-> # TEAM_DOMAIN=<Team>.cloudflareaccess.com
-> # AUD_BLOG=xxxx
-> # AUD_GRAFANA=xxxx
-> ```
+
+> [!TIP]
+> - 建议使用.env文件存储环境变量
+> - 创建一个名为 .env 的文件, 内容如下:
+> - TEAM_DOMAIN=<Team>.cloudflareaccess.com
+> - AUD_BLOG=xxxx
+> - AUD_GRAFANA=xxxx
 
 ## 配置
 > [!NOTE]
@@ -100,7 +100,7 @@ Cloudflare Access JWT 验证器 —— 适用于 `nginx auth_request`。
 > ```
 
 ## 环境变量
-> [!NOTE]
+> [!TIP]
 > - TEAM_DOMAIN：Cloudflare Access 团队域名  
 > - APP_MAP：应用与 AUD 映射，格式 `name=aud[,aud];name2=aud`  
 > - ADDR：监听地址（默认 `127.0.0.1:9000`）  
