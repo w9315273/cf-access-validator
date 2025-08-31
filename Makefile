@@ -37,7 +37,7 @@ endef
 
 define Build/Prepare
 	$(call GoPackage/Build/Prepare)
-	$(MKDIR) $(PKG_BUILD_DIR)/src/$(GO_MODULE_PATH)
+	$(INSTALL_DIR) $(PKG_BUILD_DIR)/src/$(GO_MODULE_PATH)
 	$(CP) -a $(CURDIR)/apps $(PKG_BUILD_DIR)/src/$(GO_MODULE_PATH)/
 	$(CP) -a $(CURDIR)/go.mod $(CURDIR)/go.sum $(PKG_BUILD_DIR)/src/$(GO_MODULE_PATH)/
 endef
