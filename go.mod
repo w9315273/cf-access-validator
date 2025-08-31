@@ -1,4 +1,5 @@
-module cf-access-validator
+module github.com/w9315273/cf-access-validator
+
 
 go 1.21
 

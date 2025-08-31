@@ -16,8 +16,7 @@ PKG_MAINTAINER:=w9315273
 PKG_BUILD_DEPENDS:=golang/host
 
 GO_MODULE_PATH:=github.com/w9315273/cf-access-validator
-GO_PKG:=$(GO_MODULE_PATH)
-GO_PKG_BUILD_PKG:=$(GO_MODULE_PATH)/apps/cf-auth
+GO_PKG:=$(GO_MODULE_PATH)/apps/cf-auth
 GO_PKG_LDFLAGS:=-s -w
 
 include $(INCLUDE_DIR)/package.mk
