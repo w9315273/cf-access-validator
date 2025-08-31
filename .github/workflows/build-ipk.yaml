@@ -3,7 +3,7 @@ name: 构建 cf-auth (OpenWrt 24.10.2 x86_64)
 on:
   push:
     tags: ['*']
-
+  workflow_dispatch:
 permissions:
   contents: write
 
