@@ -36,9 +36,14 @@ endef
 
 define Build/Prepare
 	$(call GoPackage/Build/Prepare)
+
 	$(INSTALL_DIR) $(PKG_BUILD_DIR)/src/$(GO_MODULE_PATH)
 	$(CP) -a $(CURDIR)/apps $(PKG_BUILD_DIR)/src/$(GO_MODULE_PATH)/
 	$(CP) -a $(CURDIR)/go.mod $(CURDIR)/go.sum $(PKG_BUILD_DIR)/src/$(GO_MODULE_PATH)/
+
+	$(INSTALL_DIR) $(PKG_BUILD_DIR)/.go_work/src/$(GO_MODULE_PATH)
+	$(CP) -a $(CURDIR)/apps $(PKG_BUILD_DIR)/.go_work/src/$(GO_MODULE_PATH)/
+	$(CP) -a $(CURDIR)/go.mod $(CURDIR)/go.sum $(PKG_BUILD_DIR)/.go_work/src/$(GO_MODULE_PATH)/
 endef
 
 define Build/Compile
@@ -59,6 +64,10 @@ define Package/cf-auth/install
 
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_CONF) $(CURDIR)/files/etc/config/cf-auth $(1)/etc/config/cf-auth
+endef
+
+define Package/cf-auth/conffiles
+/etc/config/cf-auth
 endef
 
 $(eval $(call BuildPackage,$(PKG_NAME)))
