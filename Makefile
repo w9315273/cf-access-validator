@@ -12,7 +12,6 @@ PKG_VERSION:=0.1.0
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=w9315273
-
 PKG_BUILD_DEPENDS:=golang/host
 
 GO_MODULE_PATH:=github.com/w9315273/cf-access-validator
@@ -32,7 +31,7 @@ define Package/cf-auth
 endef
 
 define Package/cf-auth/description
-Minimal Cloudflare Access JWT validator for OpenWrt (nginx auth_request).
+Minimal Cloudflare Access JWT validator for OpenWrt.
 endef
 
 define Build/Prepare
@@ -40,14 +39,20 @@ define Build/Prepare
 	$(INSTALL_DIR) $(PKG_BUILD_DIR)/src/$(GO_MODULE_PATH)
 	$(CP) -a $(CURDIR)/apps $(PKG_BUILD_DIR)/src/$(GO_MODULE_PATH)/
 	$(CP) -a $(CURDIR)/go.mod $(CURDIR)/go.sum $(PKG_BUILD_DIR)/src/$(GO_MODULE_PATH)/
+endef
 
-	$(INSTALL_DIR) $(PKG_BUILD_DIR)/.go_work/src/$(GO_MODULE_PATH)
-	$(CP) -a $(CURDIR)/apps $(PKG_BUILD_DIR)/.go_work/src/$(GO_MODULE_PATH)/
-	$(CP) -a $(CURDIR)/go.mod $(CURDIR)/go.sum $(PKG_BUILD_DIR)/.go_work/src/$(GO_MODULE_PATH)/
+define Build/Compile
+	( \
+		cd $(PKG_BUILD_DIR)/src/$(GO_MODULE_PATH)/apps/cf-auth ; \
+		GO111MODULE=on CGO_ENABLED=0 \
+		$(STAGING_DIR_HOSTPKG)/bin/go build -trimpath -ldflags "$(GO_PKG_LDFLAGS)" \
+			-o $(PKG_BUILD_DIR)/bin/cf-auth ; \
+	)
 endef
 
 define Package/cf-auth/install
-	$(call GoPackage/Package/Install/Bin,$(1))
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/cf-auth $(1)/usr/bin/cf-auth
 
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) $(CURDIR)/files/etc/init.d/cf-auth $(1)/etc/init.d/cf-auth
@@ -56,5 +61,4 @@ define Package/cf-auth/install
 	$(INSTALL_CONF) $(CURDIR)/files/etc/config/cf-auth $(1)/etc/config/cf-auth
 endef
 
-$(eval $(call GoBinPackage,$(PKG_NAME)))
 $(eval $(call BuildPackage,$(PKG_NAME)))
