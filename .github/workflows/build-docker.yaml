@@ -53,3 +53,11 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: 清理未打标签的历史版本
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: ${{ github.repository }}
+          package-type: 'container'
+          delete-only-untagged-versions: true
+          min-versions-to-keep: 1
